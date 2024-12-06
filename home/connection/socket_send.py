@@ -7,7 +7,7 @@ def send_tcp(data="", ip="", port=None):
     sockaddr = socket.getaddrinfo(ip, port)[0][-1]
     s = socket.socket()
     s.connect(sockaddr)
-    s.send(data.encode("utf-8"))
+    s.send(data)
     print(f"Sent data: {data}")
     s.close()
 
@@ -15,7 +15,7 @@ def send_tcp(data="", ip="", port=None):
 def send_udp(data="", ip="", port=None):
     sockaddr = socket.getaddrinfo(ip, port)[0][-1]
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.sendto(data.encode("utf-8"), sockaddr)
+    s.sendto(data, sockaddr)
     print(f"Sent data: {data}")
     s.close()
 

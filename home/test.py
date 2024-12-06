@@ -16,4 +16,6 @@ def test():
 def hcsrTest():
     sensor = HCSR04(2, 4)  # trigger, echo
     value = sensor.distance_cm()
-    print(value)
+    # print(value)
+    # return value  # float
+    return "hcsr04 test"

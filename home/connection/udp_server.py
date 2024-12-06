@@ -1,13 +1,16 @@
 # udp_server.py
 import socket
+from home.methods.aes import AES
+from home.communication.messages.message_manipulator import MessageManipulator
 
 
 class UDPServer:
-    def __init__(self, ip="0.0.0.0", port=8080):
+    def __init__(self, ip="0.0.0.0", port=8080, key="key"):
         self.udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)  # <-- udp
         self.udp_socket.bind((ip, port))  # Listen on all interfaces, port 8080
         self.port = port
         self.ip = ip
+        self.manipulator = MessageManipulator(AES(key=key))
 
     def receive(self):
         try:
@@ -16,11 +19,15 @@ class UDPServer:
                 data, client_address = self.udp_socket.recvfrom(
                     1024
                 )  # Buffer size is 1024 bytes
+
+                resolved_data = self.manipulator.decrypt(data.decode("utf-8"))
+
                 print(
                     "Received from {}: {}".format(client_address, data.decode("utf-8"))
                 )
-                # Respond to the client (optional)
-                self.udp_socket.sendto(b"Data received!", client_address)
+
+                print("Resolved: {}".format(resolved_data.getContent()))
+
         except KeyboardInterrupt:
             print("Server stopped.")
         finally:
