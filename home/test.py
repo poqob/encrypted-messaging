@@ -1,11 +1,21 @@
+# test.py
 from home.methods.aes import AES
 from home.communication.messages.message_manipulator import MessageManipulator
+from home.connection.socket_test import test as socketTest
+from home.hardware.hcsr04 import HCSR04
 
 
 def test():
     key = b"bumBe"
     manip = MessageManipulator(AES(key=key))
-    e = manip.encrypt("metin")
-    print(e.getContent())
+    e = manip.encrypt("estonya eş genel başkanı")
+    print(e.toString())
     d = manip.decrypt(e.getContent())
     print(d.getContent())
+    socketTest(d.getContent())
+
+
+def hcsrTest():
+    sensor = HCSR04(2, 4)  # trigger, echo
+    value = sensor.distance_cm()
+    print(value)
