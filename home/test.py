@@ -1,7 +1,6 @@
 # test.py
 from home.methods.aes import AES
 from home.communication.messages.message_manipulator import MessageManipulator
-from home.connection.socket_test import test as socketTest
 from home.hardware.hcsr04 import HCSR04
 
 
@@ -12,7 +11,6 @@ def test():
     print(e.toString())
     d = manip.decrypt(e.getContent())
     print(d.getContent())
-    socketTest(d.getContent())
 
 
 def hcsrTest():
