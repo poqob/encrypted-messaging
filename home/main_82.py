@@ -1,6 +1,4 @@
-# main_82.py
 from home.connection.connection import Connection
-from home.connection.udp_server import UDPServer
 from home.connection.socket_send import (
     send_udp,
     send_udp_with_interval,
@@ -8,10 +6,14 @@ from home.connection.socket_send import (
     send_tcp_with_interval,
 )
 from home.test import test, hcsrTest
+from home.methods.aes import AES
+from home.communication.messages.message_manipulator import MessageManipulator
+import time
+from home.hardware.hcsr04 import HCSR04
+from home.hardware.ldr import LDR
 
-
-# esp82 conf
-ip = "192.168.1.78"
+# esp32 conf
+ip = "192.168.1.79"
 subnet = "255.255.255.0"
 gateway = "192.168.1.1"
 dns = "8.8.8.8"
@@ -19,9 +21,19 @@ dns = "8.8.8.8"
 # aes conf
 key = b"poqob&&boss"
 
+sensor = HCSR04(2, 4)  # trigger, echo #d2,d4
+
 
 def main():
     conn = Connection("merkur", "merkur.online", ip, subnet, gateway, dns)
     conn.connect()
-    server = UDPServer(port=7898, key=key)  # -> esp82
-    server.receive()  # -> esp82
+    manipulator = MessageManipulator(AES(key=key))
+    ldr = LDR(5)
+    while True:
+        send_udp(
+            ip="192.168.1.78",
+            port=7898,
+            data=manipulator.encrypt(
+                message=str(sensor.distance_cm())[0:7] + str(":") + str(ldr.read())
+            ).getContent(),
+        )

@@ -2,6 +2,7 @@
 import socket
 from home.methods.aes import AES
 from home.communication.messages.message_manipulator import MessageManipulator
+from home.hardware.led import Led
 
 
 class UDPServer:
@@ -11,8 +12,9 @@ class UDPServer:
         self.port = port
         self.ip = ip
         self.manipulator = MessageManipulator(AES(key=key))
+        self.led = Led(13)
 
-    def receive(self):
+    def receive(self, callback):
         try:
             while True:
                 # Receive data and the client's address
@@ -20,13 +22,20 @@ class UDPServer:
                     1024
                 )  # Buffer size is 1024 bytes
 
-                resolved_data = self.manipulator.decrypt(data.decode("utf-8"))
+                resolved_data = self.manipulator.decrypt(data)
+                resolved_data_as_str = resolved_data.toString()
+                print("Received data:{}\nReceived from:{}".format(data, client_address))
 
-                print(
-                    "Received from {}: {}".format(client_address, data.decode("utf-8"))
+                callback(
+                    "srv:{}:{}\n".format(self.ip, self.port),
+                    "cln:{}\n".format(client_address[0]),
+                    "data:{}".format(resolved_data_as_str),
                 )
 
-                print("Resolved: {}".format(resolved_data.getContent()))
+                if resolved_data_as_str[-1] == "0":
+                    self.led.on()
+                else:
+                    self.led.off()
 
         except KeyboardInterrupt:
             print("Server stopped.")
