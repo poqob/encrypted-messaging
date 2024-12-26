@@ -1,0 +1,6 @@
+@startuml
+class AMethod {
+  + encrypt()
+  + decrypt()
+}
+@enduml

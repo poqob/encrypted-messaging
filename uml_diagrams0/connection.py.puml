@@ -1,0 +1,6 @@
+@startuml
+class Connection {
+  + __init__()
+  + connect()
+}
+@enduml

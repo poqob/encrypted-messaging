@@ -1,0 +1,10 @@
+@startuml
+class Display {
+  + __init__()
+  + display()
+  + show()
+  + clear()
+  + show_stream()
+  + show_args()
+}
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+class SSD1306 {
+  + __init__()
+  + init_display()
+  + poweroff()
+  + contrast()
+  + invert()
+  + show()
+  + fill()
+  + pixel()
+  + scroll()
+  + text()
+  + hline()
+  + vline()
+  + line()
+  + rect()
+  + fill_rect()
+  + blit()
+}
+class SSD1306_I2C {
+  + __init__()
+  + write_cmd()
+  + write_data()
+  + poweron()
+}
+class SSD1306_SPI {
+  + __init__()
+  + write_cmd()
+  + write_data()
+  + poweron()
+}
+@enduml

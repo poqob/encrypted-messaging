@@ -1,0 +1,8 @@
+@startuml
+class LED {
+  + __init__()
+  + on()
+  + off()
+  + toggle()
+}
+@enduml

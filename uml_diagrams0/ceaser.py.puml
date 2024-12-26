@@ -1,0 +1,8 @@
+@startuml
+class Ceaser {
+  + __init__()
+  + encrypt()
+  + decrypt()
+  + __str__()
+}
+@enduml

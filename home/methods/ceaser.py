@@ -1,5 +1,9 @@
-class Ceaser:
+from home.methods.a_method import AMethod
+
+
+class Ceaser(AMethod):
     def __init__(self, shift=0):
+        super().__init__()  # Call the parent class constructor if needed
         self.shift = shift
         self.dynamic = self.shift == 0
 

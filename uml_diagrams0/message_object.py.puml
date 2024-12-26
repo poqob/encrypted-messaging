@@ -1,0 +1,7 @@
+@startuml
+class MessageObject {
+  + __init__()
+  + getContent()
+  + __str__()
+}
+@enduml

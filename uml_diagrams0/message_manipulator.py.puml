@@ -1,0 +1,7 @@
+@startuml
+class MessageManipulator {
+  + __init__()
+  + encrypt()
+  + decrypt()
+}
+@enduml

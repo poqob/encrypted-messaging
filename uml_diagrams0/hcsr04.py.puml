@@ -1,0 +1,8 @@
+@startuml
+class HCSR04 {
+  + __init__()
+  + _send_pulse_and_wait()
+  + distance_mm()
+  + distance_cm()
+}
+@enduml

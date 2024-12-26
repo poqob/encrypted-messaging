@@ -1,6 +1,7 @@
 # Aes.py
 from cryptolib import aes
 import os
+import base64
 
 # key and message are padded with pkcs7 alghorithm.
 # message object: iv + message (cyrpted)
