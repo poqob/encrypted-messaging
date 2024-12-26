@@ -1,6 +1,7 @@
 # udp_server.py
 import socket
 from home.methods.aes import AES
+from home.methods.ceaser import Ceaser
 from home.communication.messages.message_manipulator import MessageManipulator
 from home.hardware.led import Led
 
@@ -23,7 +24,7 @@ class UDPServer:
                 )  # Buffer size is 1024 bytes
 
                 resolved_data = self.manipulator.decrypt(data)
-                resolved_data_as_str = resolved_data.toString()
+                resolved_data_as_str = resolved_data.content
                 print("Received data:{}\nReceived from:{}".format(data, client_address))
 
                 callback(

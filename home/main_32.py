@@ -1,13 +1,6 @@
 # main_32.py
 from home.connection.connection import Connection
 from home.connection.udp_server import UDPServer
-from home.connection.socket_send import (
-    send_udp,
-    send_udp_with_interval,
-    send_tcp,
-    send_tcp_with_interval,
-)
-from home.test import test, hcsrTest
 from home.hardware.display import Display
 
 # esp32 conf

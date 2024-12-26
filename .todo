@@ -1,5 +1,4 @@
-[TODO]: set udp server on esp32
-[TODO]: set web server on esp32
-[TODO]: set hardware on esp82
-[TODO]: set sender on esp82
+combine ceaser and aes. 
 
+fix aes output to unicode. 
+wrap aes output with ceasar.
